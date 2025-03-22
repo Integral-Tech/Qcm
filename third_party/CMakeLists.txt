@@ -6,17 +6,6 @@ add_subdirectory(qr_code)
 add_library(random INTERFACE)
 target_include_directories(random INTERFACE random/include)
 
-add_library(expected INTERFACE)
-target_include_directories(expected INTERFACE expected/include)
-add_library(tl::expected ALIAS expected)
-
-set(KDSingleApplication_QT6 ON)
-set(KDSingleApplication_STATIC ON)
-set(KDSingleApplication_TESTS OFF)
-set(KDSingleApplication_EXAMPLES OFF)
-set(KDSingleApplication_DOCS OFF)
-add_subdirectory(KDSingleApplication EXCLUDE_FROM_ALL)
-
 # asio
 add_library(asio INTERFACE)
 target_compile_definitions(asio INTERFACE ASIO_NO_DEPRECATED)
@@ -109,3 +98,31 @@ endif()
 if(NOT TARGET cubeb::cubeb)
   add_library(cubeb::cubeb ALIAS cubeb)
 endif()
+
+# KDSingleApplication
+set(KDSingleApplication_QT6 ON)
+set(KDSingleApplication_STATIC ON)
+set(KDSingleApplication_TESTS OFF)
+set(KDSingleApplication_EXAMPLES OFF)
+set(KDSingleApplication_DOCS OFF)
+FetchContent_Declare(
+  KDSingleApplication
+  GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
+  GIT_TAG 631237acd4e20251c7f702db5e5434c83f0e336d
+  GIT_SHALLOW 1
+  GIT_PROGRESS 1
+  SYSTEM EXCLUDE_FROM_ALL FIND_PACKAGE_ARGS QUIET GLOBAL)
+FetchContent_MakeAvailable(KDSingleApplication)
+
+# expected
+set(EXPECTED_BUILD_PACKAGE OFF)
+set(EXPECTED_BUILD_TESTS OFF)
+set(EXPECTED_BUILD_PACKAGE_DEB OFF)
+FetchContent_Declare(
+  expected
+  GIT_REPOSITORY https://github.com/TartanLlama/expected.git
+  GIT_TAG 41d3e1f48d682992a2230b2a715bca38b848b269
+  GIT_SHALLOW 1
+  GIT_PROGRESS 1
+  EXCLUDE_FROM_ALL)
+FetchContent_MakeAvailable(expected)
