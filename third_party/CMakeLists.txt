@@ -127,8 +127,8 @@ endif()
 # ncrequest
 FetchContent_Declare(
   ncrequest
-  GIT_REPOSITORY https://github.com/hypengw/ncrequest.git
-  GIT_TAG 470df24a242747d4b8747f38da126d25354c784d
+  GIT_REPOSITORY https://github.com/Integral-Tech/ncrequest.git
+  GIT_TAG fix-build-error
   GIT_SHALLOW 0
   GIT_PROGRESS 1
   EXCLUDE_FROM_ALL)
